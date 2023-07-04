@@ -28,13 +28,13 @@ def main():
     elif choice == "3":
         fuel()
     elif choice == "4":
-        tos()
+        show("tos")
     elif choice == "5":
-        tas()
+        show("tas")
     elif choice == "6":
-        tng()
+        show("tng")
     elif choice == "7":
-        mk()
+        show("mk")
     elif choice == "8":
         reading()
 
@@ -81,39 +81,14 @@ def fuel():
     select_fuel = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
     sql_select(db ,select_fuel)
 
-def tos():
-    # Star Trek: The Original Series
+def show(table):
     db = media_db
-    table = "tos"
-    menu = [
-    "",
-    "1: List episodes",
-    "2: Random episode",
-    "3: Mark episode as watched"
-    ]
-    for i in menu:
-        print(i)
-    choice = input("\n")
-    if choice == "1":
-        select_all = f"SELECT * from {table}"
-        sql_select(db, select_all)
-    elif choice == "2":
-        select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
-        sql_select(db, select_random)
-    elif choice == "3":
-        episode = input("\nEpisode: ")
-        update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
-        sql_statement(db, update_episode)
-
-def tas():
-    # Star Trek: The Animated Series
-    db = media_db
-    table = "tas"
     menu = [
     "",
     "1: List episodes",
     "2: Next episode",
-    "3: Mark episode as watched"
+    "3: Random episode",
+    "4: Mark episode as watched"
     ]
     for i in menu:
         print(i)
@@ -125,54 +100,9 @@ def tas():
         select_next = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
         sql_select(db, select_next)
     elif choice == "3":
-        episode = input("\nEpisode: ")
-        update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
-        sql_statement(db, update_episode)
-
-def tng():
-    # Star Trek: The Next Generation
-    db = media_db
-    table = "tng"
-    menu = [
-    "",
-    "1: List episodes",
-    "2: Random episode",
-    "3: Mark episode as watched"
-    ]
-    for i in menu:
-        print(i)
-    choice = input("\n")
-    if choice == "1":
-        select_all = f"SELECT * from {table}"
-        sql_select(db, select_all)
-    elif choice == "2":
         select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
         sql_select(db, select_random)
-    elif choice == "3":
-        episode = input("\nEpisode: ")
-        update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
-        sql_statement(db, update_episode)
-
-def mk():
-    # Master Keaton
-    db = media_db
-    table = "mk"
-    menu = [
-    "",
-    "1: List episodes",
-    "2: Next episode",
-    "3: Mark episode as watched"
-    ]
-    for i in menu:
-        print(i)
-    choice = input("\n")
-    if choice == "1":
-        select_all = f"SELECT * from {table}"
-        sql_select(db, select_all)
-    elif choice == "2":
-        select_next = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
-        sql_select(db, select_next)
-    elif choice == "3":
+    elif choice == "4":
         episode = input("\nEpisode: ")
         update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
         sql_statement(db, update_episode)
