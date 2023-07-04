@@ -46,7 +46,7 @@ def sql_statement(db, statement):
     con.close()
 
 def sql_select(db, statement):
-    # SELECT statements are run via shell to produce the desired output format
+    # SELECT statements are run via shell to produce the "-box" output format
     subprocess.run([f"sqlite3 -box {db} '{statement}'"], shell=True)
     # subprocess.run(["sqlite3", "-box", db, statement], shell=True)
 
@@ -55,8 +55,8 @@ def water():
     table = "water"
     liters = input("\nLiters: ")
     insert_water = f"INSERT INTO {table} VALUES (date('now', 'localtime', '-1 day'), {liters})"
-    sql_statement(db, insert_water)
     select_water = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
+    sql_statement(db, insert_water)
     sql_select(db, select_water)
 
 def yoga():
@@ -64,8 +64,8 @@ def yoga():
     table = "yoga"
     minutes = input("\nMinutes: ")
     insert_yoga = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {minutes})"
-    sql_statement(db, insert_yoga)
     select_yoga = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
+    sql_statement(db, insert_yoga)
     sql_select(db, select_yoga)
 
 def fuel():
@@ -77,8 +77,8 @@ def fuel():
     avg_mpg = input("AvgMPG: ")
     miles = input("Miles: ")
     insert_fuel = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {amount}, {ppg}, {gallons}, {avg_mpg}, {miles})"
-    sql_statement(db, insert_fuel)
     select_fuel = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
+    sql_statement(db, insert_fuel)
     sql_select(db ,select_fuel)
 
 def show(table):
@@ -93,14 +93,14 @@ def show(table):
     for i in menu:
         print(i)
     choice = input("\n")
+    select_all = f"SELECT * from {table}"
+    select_next = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
+    select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
     if choice == "1":
-        select_all = f"SELECT * from {table}"
         sql_select(db, select_all)
     elif choice == "2":
-        select_next = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
         sql_select(db, select_next)
     elif choice == "3":
-        select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
         sql_select(db, select_random)
     elif choice == "4":
         episode = input("\nEpisode: ")
