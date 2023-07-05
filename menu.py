@@ -1,10 +1,16 @@
 import sqlite3
 import subprocess
+import platform
 
-# change the value of these global variables to "test.db" for testing
-health_db = "~/docs/db/health.db"
-auto_db = "~/docs/db/auto.db"
-media_db = "~/docs/db/media.db"
+if platform.system() == 'Linux':
+    path = '/home/maf/docs/db/'
+else: 
+    path = '/Users/maf/docs/db/'
+
+# change the string part of value of these variables to "test.db" for testing
+health_db = path + "health.db"
+auto_db = path + "auto.db"
+media_db = path + "media.db"
 
 def main():
     menu = [
@@ -103,7 +109,7 @@ def show(table):
     elif choice == "3":
         sql_select(db, select_random)
     elif choice == "4":
-        episode = input("\nEpisode: ")
+        episode = int(input("\nEpisode: "))
         update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
         sql_statement(db, update_episode)
 
