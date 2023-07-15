@@ -4,7 +4,7 @@ import platform
 
 if platform.system() == 'Linux':
     path = '/home/maf/docs/db/'
-else: 
+else:
     path = '/Users/maf/docs/db/'
 
 # change the string part of value of this variable to "test.db" for testing
@@ -17,6 +17,9 @@ def main():
     "2: Star Trek: The Animated Series",
     "3: Star Trek: The Next Generation",
     "4: Master Keaton",
+    "5: The X-Files",
+    "6: Cosmos",
+    "7: Connections"
     ]
     for i in menu:
         print(i)
@@ -29,6 +32,12 @@ def main():
         show("tng")
     elif choice == "4":
         show("mk")
+    elif choice == "5":
+        show("xfiles")
+    elif choice == "6":
+        show("cosmos")
+    elif choice == "7":
+        show("connections")
 
 def sql_statement(db, statement):
     con = sqlite3.connect(db)
