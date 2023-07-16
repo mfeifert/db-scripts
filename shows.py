@@ -63,12 +63,15 @@ def show(table):
     "3: Random episode",
     "4: Mark episode as watched"
     ]
+    if table == "xfiles":
+        menu.append("m: List mythology arc")
     for i in menu:
         print(i)
     choice = input("\n")
     select_all = f"SELECT * from {table}"
     select_next = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
     select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
+    select_mytharc = f"SELECT * FROM {table} WHERE Mytharc IS NOT NULL"
     if choice == "1":
         sql_select(db, select_all)
     elif choice == "2":
@@ -79,5 +82,7 @@ def show(table):
         episode = int(input("\nEpisode: "))
         update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
         sql_statement(db, update_episode)
+    elif choice == "m":
+        sql_select(db, select_mytharc)
 
 main()
