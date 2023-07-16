@@ -19,7 +19,8 @@ def main():
     "4: Master Keaton",
     "5: The X-Files",
     "6: Cosmos",
-    "7: Connections"
+    "7: Connections",
+    "8: The Twilight Zone"
     ]
     for i in menu:
         print(i)
@@ -38,6 +39,8 @@ def main():
         show("cosmos")
     elif choice == "7":
         show("connections")
+    elif choice == "8":
+        show("twilightzone")
 
 def sql_statement(db, statement):
     con = sqlite3.connect(db)
