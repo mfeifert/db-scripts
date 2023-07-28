@@ -10,6 +10,18 @@ else:
 # change the string part of value of this variable to "test.db" for testing
 media_db = path + "media.db"
 
+shows = {
+    'tos': 'Star Trek: The Original Series',
+    'tas': 'Star Trek: The Animated Series',
+    'tng': 'Star Trek: The Next Generation',
+    'cosmos': 'Cosmos',
+    'connections': 'Connections',
+    'growingup': 'Growing Up in the Universe',
+    'mk': 'Master Keaton',
+    'xfiles': 'The X-Files',
+    'twilightzone': 'The Twilight Zone'
+}
+
 def main():
     menu = [
     "",
