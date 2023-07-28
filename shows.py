@@ -23,39 +23,12 @@ shows = {
 }
 
 def main():
-    menu = [
-    "",
-    "1: Star Trek: The Original Series",
-    "2: Star Trek: The Animated Series",
-    "3: Star Trek: The Next Generation",
-    "4: Master Keaton",
-    "5: The X-Files",
-    "6: Cosmos",
-    "7: Connections",
-    "8: Growing Up in the Universe",
-    "9: The Twilight Zone"
-    ]
-    for i in menu:
-        print(i)
-    choice = input("\n")
-    if choice == "1":
-        show("tos")
-    elif choice == "2":
-        show("tas")
-    elif choice == "3":
-        show("tng")
-    elif choice == "4":
-        show("mk")
-    elif choice == "5":
-        show("xfiles")
-    elif choice == "6":
-        show("cosmos")
-    elif choice == "7":
-        show("connections")
-    elif choice == "8":
-        show("growingup")
-    elif choice == "9":
-        show("twilightzone")
+    index = 1
+    for i in list(shows.items()):
+       print(f'{index}: {i[1]}')
+       index += 1
+
+
 
 def sql_statement(db, statement):
     con = sqlite3.connect(db)
@@ -108,3 +81,41 @@ def show(table):
         sql_select(db, select_mytharc)
 
 main()
+
+
+
+
+def oldmain():
+    menu = [
+    "",
+    "1: Star Trek: The Original Series",
+    "2: Star Trek: The Animated Series",
+    "3: Star Trek: The Next Generation",
+    "4: Master Keaton",
+    "5: The X-Files",
+    "6: Cosmos",
+    "7: Connections",
+    "8: Growing Up in the Universe",
+    "9: The Twilight Zone"
+    ]
+    for i in menu:
+        print(i)
+    choice = input("\n")
+    if choice == "1":
+        show("tos")
+    elif choice == "2":
+        show("tas")
+    elif choice == "3":
+        show("tng")
+    elif choice == "4":
+        show("mk")
+    elif choice == "5":
+        show("xfiles")
+    elif choice == "6":
+        show("cosmos")
+    elif choice == "7":
+        show("connections")
+    elif choice == "8":
+        show("growingup")
+    elif choice == "9":
+        show("twilightzone")
