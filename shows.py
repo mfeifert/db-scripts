@@ -20,7 +20,8 @@ def main():
     "5: The X-Files",
     "6: Cosmos",
     "7: Connections",
-    "8: The Twilight Zone"
+    "8: Growing Up in the Universe",
+    "9: The Twilight Zone"
     ]
     for i in menu:
         print(i)
@@ -40,6 +41,8 @@ def main():
     elif choice == "7":
         show("connections")
     elif choice == "8":
+        show("growingup")
+    elif choice == "9":
         show("twilightzone")
 
 def sql_statement(db, statement):
@@ -73,15 +76,22 @@ def show(table):
     select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
     select_mytharc = f"SELECT * FROM {table} WHERE Mytharc IS NOT NULL"
     if choice == "1":
+        print("")
         sql_select(db, select_all)
+        print("")
     elif choice == "2":
+        print("")
         sql_select(db, select_next)
+        print("")
     elif choice == "3":
+        print("")
         sql_select(db, select_random)
+        print("")
     elif choice == "4":
         episode = int(input("\nEpisode: "))
         update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
         sql_statement(db, update_episode)
+        print("")
     elif choice == "m":
         sql_select(db, select_mytharc)
 
