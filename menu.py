@@ -2,34 +2,35 @@ import sqlite3
 import subprocess
 import platform
 
+# set correct path to database for Linux or macOS
 if platform.system() == 'Linux':
     path = '/home/maf/docs/db/'
 else: 
     path = '/Users/maf/docs/db/'
 
 # change the string part of value of these variables to "test.db" for testing
-health_db = path + "health.db"
-auto_db = path + "auto.db"
-media_db = path + "media.db"
+health_db = path + 'health.db'
+auto_db = path + 'auto.db'
+media_db = path + 'media.db'
 
 def main():
     menu = [
-    "",
-    "1: Water",
-    "2: Yoga",
-    "3: Fuel",
-    "4: Reading"
+    '',
+    '1. Water',
+    '2. Yoga',
+    '3. Fuel',
+    '4. Reading'
     ]
     for i in menu:
         print(i)
-    choice = input("\n")
-    if choice == "1":
+    choice = input('\n')
+    if choice == '1':
         water()
-    elif choice == "2":
+    elif choice == '2':
         yoga()
-    elif choice == "3":
+    elif choice == '3':
         fuel()
-    elif choice == "4":
+    elif choice == '4':
         reading()
 
 def sql_statement(db, statement):
@@ -46,8 +47,8 @@ def sql_select(db, statement):
 
 def water():
     db = health_db
-    table = "water"
-    liters = input("\nLiters: ")
+    table = 'water'
+    liters = input('\nLiters: ')
     insert_water = f"INSERT INTO {table} VALUES (date('now', 'localtime', '-1 day'), {liters})"
     select_water = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
     sql_statement(db, insert_water)
@@ -55,8 +56,8 @@ def water():
 
 def yoga():
     db = health_db
-    table = "yoga"
-    minutes = input("\nMinutes: ")
+    table = 'yoga'
+    minutes = input('\nMinutes: ')
     insert_yoga = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {minutes})"
     select_yoga = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
     sql_statement(db, insert_yoga)
@@ -64,12 +65,12 @@ def yoga():
 
 def fuel():
     db = auto_db
-    table = "fuel"
-    amount = input("\nAmount: ")
-    ppg = input("PPG: ")
-    gallons = input("Gallons: ")
-    avg_mpg = input("AvgMPG: ")
-    miles = input("Miles: ")
+    table = 'fuel'
+    amount = input('\nAmount: ')
+    ppg = input('PPG: ')
+    gallons = input('Gallons: ')
+    avg_mpg = input('Avg MPG: ')
+    miles = input('Miles: ')
     insert_fuel = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {amount}, {ppg}, {gallons}, {avg_mpg}, {miles})"
     select_fuel = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
     sql_statement(db, insert_fuel)
@@ -77,7 +78,7 @@ def fuel():
 
 def reading():
     db = media_db
-    table = "reading"
+    table = 'reading'
     select_reading = f"SELECT * FROM {table}"
     sql_select(db, select_reading)
 

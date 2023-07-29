@@ -28,7 +28,7 @@ def main():
     index = 1
     print('')
     for i in list(shows.items()):
-       print(f'{index}: {i[1]}')
+       print(f'{index}. {i[1]}')
        index += 1
     print('')
     selection = int(input()) - 1
@@ -50,13 +50,13 @@ def show(table):
     db = media_db
     menu = [
     '',
-    '1: List episodes',
-    '2: Next episode',
-    '3: Random episode',
-    '4: Mark episode as watched'
+    '1. List episodes',
+    '2. Next episode',
+    '3. Random episode',
+    '4. Mark episode as watched'
     ]
     if table == 'xfiles':
-        menu.append('m: List mythology arc')
+        menu.append('m. List mythology arc')
     for i in menu:
         print(i)
     choice = input('\n')
