@@ -24,6 +24,7 @@ shows = {
     'xfiles': 'The X-Files',
     'twilightzone': 'The Twilight Zone',
     'mk': 'Master Keaton',
+    'monster': 'Monster',
     'lotgh': 'Legend of the Galactic Heroes'
 }
 
