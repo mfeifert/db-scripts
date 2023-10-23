@@ -10,7 +10,7 @@ else:
 # change the string part of value of this variable to "test.db" for testing
 media_db = path + 'media.db'
 
-# Key = table name, Value = show title
+# 'table name': 'show title'
 shows = {
     'tos': 'Star Trek: The Original Series',
     'tas': 'Star Trek: The Animated Series',
@@ -18,14 +18,17 @@ shows = {
     'ds9': 'Star Trek: Deep Space Nine',
     'stv': 'Star Trek: Voyager',
     'ste': 'Star Trek: Enterprise',
+    'babylon5': 'Babylon 5',
     'cosmos': 'Cosmos',
     'connections': 'Connections',
     'growingup': 'Growing Up in the Universe',
     'xfiles': 'The X-Files',
     'twilightzone': 'The Twilight Zone',
+    'ft': 'Fawlty Towers',
     'mk': 'Master Keaton',
     'monster': 'Monster',
-    'lotgh': 'Legend of the Galactic Heroes'
+    'lotgh': 'Legend of the Galactic Heroes',
+    'rolw': 'Record of Lodoss War'
 }
 
 def main():
