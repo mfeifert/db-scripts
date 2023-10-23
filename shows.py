@@ -33,11 +33,11 @@ shows = {
 
 def main():
     index = 1
-    print('')
+    print()
     for i in list(shows.items()):
        print(f'{index}. {i[1]}')
        index += 1
-    print('')
+    print()
     selection = int(input()) - 1
     show(list(shows.items())[selection][0])
 
@@ -72,22 +72,22 @@ def show(table):
     select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
     select_mytharc = f"SELECT * FROM {table} WHERE Mytharc IS NOT NULL"
     if choice == '1':
-        print('')
+        print()
         sql_select(db, select_all)
-        print('')
+        print()
     elif choice == '2':
-        print('')
+        print()
         sql_select(db, select_next)
-        print('')
+        print()
     elif choice == '3':
-        print('')
+        print()
         sql_select(db, select_random)
-        print('')
+        print()
     elif choice == '4':
         episode = int(input('\nEpisode: '))
         update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
         sql_statement(db, update_episode)
-        print('')
+        print()
     elif choice == 'm':
         sql_select(db, select_mytharc)
 
