@@ -60,35 +60,41 @@ def show(table):
     '1. List episodes',
     '2. Next episode',
     '3. Random episode',
-    '4. Mark episode as watched'
+    '4. Mark episode as watched',
+    'q. Quit'
     ]
     if table == 'xfiles':
         menu.append('m. List mythology arc')
     for i in menu:
         print(i)
-    choice = input(f'\n{shows[table]}> ')
     select_all = f"SELECT * from {table}"
     select_next = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
     select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
     select_mytharc = f"SELECT * FROM {table} WHERE Mytharc IS NOT NULL"
-    if choice == '1':
-        print()
-        sql_select(db, select_all)
-        print()
-    elif choice == '2':
-        print()
-        sql_select(db, select_next)
-        print()
-    elif choice == '3':
-        print()
-        sql_select(db, select_random)
-        print()
-    elif choice == '4':
-        episode = int(input('\nEpisode: '))
-        update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
-        sql_statement(db, update_episode)
-        print()
-    elif choice == 'm':
-        sql_select(db, select_mytharc)
+
+    while True:
+        choice = input(f'\n{shows[table]}> ')
+        if choice == '1':
+            print()
+            sql_select(db, select_all)
+            # print()
+        elif choice == '2':
+            print()
+            sql_select(db, select_next)
+            # print()
+        elif choice == '3':
+            print()
+            sql_select(db, select_random)
+            # print()
+        elif choice == '4':
+            episode = int(input('\nEpisode: '))
+            update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
+            sql_statement(db, update_episode)
+            # print()
+        elif choice == 'q':
+            print()
+            break
+        elif choice == 'm':
+            sql_select(db, select_mytharc)
 
 main()
