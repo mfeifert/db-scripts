@@ -66,7 +66,7 @@ def show(table):
         menu.append('m. List mythology arc')
     for i in menu:
         print(i)
-    choice = input('\n')
+    choice = input(f'\n{shows[table]}> ')
     select_all = f"SELECT * from {table}"
     select_next = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
     select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
