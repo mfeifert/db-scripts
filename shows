@@ -1,14 +1,14 @@
+#!/usr/bin/env python3
+
+import sys
 import sqlite3
 import subprocess
-import platform
 
-if platform.system() == 'Linux':
-    path = '/home/maf/docs/db/'
-else:
-    path = '/Users/maf/docs/db/'
+if len(sys.argv) < 2:
+    print("Usage: shows FILE")
+    sys.exit(1)
 
-# change the string part of value of this variable to "test.db" for testing
-media_db = path + 'media.db'
+db_path = sys.argv[1]
 
 # 'table name': 'show title'
 shows = {
@@ -53,17 +53,18 @@ def print_report(db, statement):
     subprocess.run([f"sqlite3 -box {db} '{statement}'"], shell=True)
 
 def print_menu_for_selected_show(table):
-    db = media_db
+    db = db_path
     menu = [
     '',
     '1. List episodes',
     '2. Next episode',
     '3. Random episode',
     '4. Mark episode as watched',
+    'm. Main menu',
     'q. Quit'
     ]
     if table == 'xfiles':
-        menu.append('m. List mythology arc')
+        menu.append('a. List mythology arc')
     for i in menu:
         print(i)
     sql_all_episodes = f"SELECT * from {table}"
@@ -90,6 +91,9 @@ def print_menu_for_selected_show(table):
             print()
             break
         elif choice == 'm':
+            print()
+            main()
+        elif choice == 'a':
             print_report(db, sql_mytharc_episodes)
 
 main()
