@@ -27,7 +27,7 @@ def insert_log_entry():
     print_report(db_path, sql_log_report)
 
 def print_daily_report():
-    sql_daily_report = "SELECT Date, sum(Liters) AS Liters FROM water GROUP BY Date ORDER BY Date DESC LIMIT 10"
+    sql_daily_report = f"SELECT Date, sum(Liters) AS Liters FROM {table} GROUP BY Date ORDER BY Date DESC LIMIT 10"
     print_report(db_path, sql_daily_report)
 
 def issue_sql_statement(db, statement):
