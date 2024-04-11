@@ -3,7 +3,6 @@
 import sys
 import sqlite3
 import subprocess
-import platform
 
 if len(sys.argv) < 2:
     print("Usage: water FILE")
@@ -14,19 +13,19 @@ table = 'water'
 
 def main():
     liters = input('\nLiters: ')
-    insert_water = f"INSERT INTO {table} VALUES (date('now', 'localtime', '-1 day'), {liters})"
-    select_water = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
-    sql_statement(db_path, insert_water)
-    sql_select(db_path, select_water)
+    sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime', '-1 day'), {liters})"
+    sql_log_report = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
+    issue_sql_statement(db_path, sql_log_entry)
+    print_report(db_path, sql_log_report)
 
-def sql_statement(db, statement):
+def issue_sql_statement(db, statement):
     con = sqlite3.connect(db)
     cur = con.cursor()
     cur.execute(statement)
     con.commit()
     con.close()
 
-def sql_select(db, statement):
+def print_report(db, statement):
     # SELECT statements are run via shell to produce the "-box" output format
     subprocess.run([f"sqlite3 -box {db} '{statement}'"], shell=True)
 
