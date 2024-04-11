@@ -4,19 +4,31 @@ import sys
 import sqlite3
 import subprocess
 
-if len(sys.argv) < 2:
-    print("Usage: water FILE")
+if len(sys.argv) < 3:
+    print("Usage: water FILE COMMAND")
     sys.exit(1)
 
 db_path = sys.argv[1]
 table = 'water'
 
 def main():
-    liters = input('\nLiters: ')
-    sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime', '-1 day'), {liters})"
-    sql_log_report = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
+    if sys.argv[2] == 'entry':
+        insert_log_entry()
+    elif sys.argv[2] == 'report':
+        print_daily_report()
+    else:
+        print('Command not recognized. Valid commands are "entry" and "report".')
+
+def insert_log_entry():
+    liters = input("Liters: ")
+    sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {liters})"
+    sql_log_report = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 10"
     issue_sql_statement(db_path, sql_log_entry)
     print_report(db_path, sql_log_report)
+
+def print_daily_report():
+    sql_daily_report = "SELECT Date, sum(Liters) AS Liters FROM water GROUP BY Date ORDER BY Date DESC LIMIT 10"
+    print_report(db_path, sql_daily_report)
 
 def issue_sql_statement(db, statement):
     con = sqlite3.connect(db)
