@@ -18,8 +18,7 @@ def main():
     '',
     '1. Water',
     '2. Yoga',
-    '3. Fuel',
-    '4. Reading'
+    '3. Fuel'
     ]
     for i in menu:
         print(i)
@@ -30,8 +29,6 @@ def main():
         yoga()
     elif choice == '3':
         fuel()
-    elif choice == '4':
-        reading()
 
 def sql_statement(db, statement):
     con = sqlite3.connect(db)
@@ -43,7 +40,6 @@ def sql_statement(db, statement):
 def sql_select(db, statement):
     # SELECT statements are run via shell to produce the "-box" output format
     subprocess.run([f"sqlite3 -box {db} '{statement}'"], shell=True)
-    # subprocess.run(["sqlite3", "-box", db, statement], shell=True)
 
 def water():
     db = health_db
@@ -75,11 +71,5 @@ def fuel():
     select_fuel = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
     sql_statement(db, insert_fuel)
     sql_select(db ,select_fuel)
-
-def reading():
-    db = media_db
-    table = 'reading'
-    select_reading = f"SELECT * FROM {table}"
-    sql_select(db, select_reading)
 
 main()

@@ -51,7 +51,6 @@ def sql_statement(db, statement):
 def sql_select(db, statement):
     # SELECT statements are run via shell to produce the "-box" output format
     subprocess.run([f"sqlite3 -box {db} '{statement}'"], shell=True)
-    # subprocess.run(["sqlite3", "-box", db, statement], shell=True)
 
 def show(table):
     db = media_db
@@ -77,20 +76,16 @@ def show(table):
         if choice == '1':
             print()
             sql_select(db, select_all)
-            # print()
         elif choice == '2':
             print()
             sql_select(db, select_next)
-            # print()
         elif choice == '3':
             print()
             sql_select(db, select_random)
-            # print()
         elif choice == '4':
             episode = int(input('\nEpisode: '))
             update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
             sql_statement(db, update_episode)
-            # print()
         elif choice == 'q':
             print()
             break
