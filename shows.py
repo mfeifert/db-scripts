@@ -39,20 +39,20 @@ def main():
        index += 1
     print()
     selection = int(input()) - 1
-    show(list(shows.items())[selection][0])
+    print_menu_for_selected_show(list(shows.items())[selection][0])
 
-def sql_statement(db, statement):
+def issue_sql_statement(db, statement):
     con = sqlite3.connect(db)
     cur = con.cursor()
     cur.execute(statement)
     con.commit()
     con.close()
 
-def sql_select(db, statement):
+def print_report(db, statement):
     # SELECT statements are run via shell to produce the "-box" output format
     subprocess.run([f"sqlite3 -box {db} '{statement}'"], shell=True)
 
-def show(table):
+def print_menu_for_selected_show(table):
     db = media_db
     menu = [
     '',
@@ -66,30 +66,30 @@ def show(table):
         menu.append('m. List mythology arc')
     for i in menu:
         print(i)
-    select_all = f"SELECT * from {table}"
-    select_next = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
-    select_random = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
-    select_mytharc = f"SELECT * FROM {table} WHERE Mytharc IS NOT NULL"
+    sql_all_episodes = f"SELECT * from {table}"
+    sql_next_episode = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
+    sql_random_episode = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
+    sql_mytharc_episodes = f"SELECT * FROM {table} WHERE Mytharc IS NOT NULL"
 
     while True:
         choice = input(f'\n{shows[table]}> ')
         if choice == '1':
             print()
-            sql_select(db, select_all)
+            print_report(db, sql_all_episodes)
         elif choice == '2':
             print()
-            sql_select(db, select_next)
+            print_report(db, sql_next_episode)
         elif choice == '3':
             print()
-            sql_select(db, select_random)
+            print_report(db, sql_random_episode)
         elif choice == '4':
             episode = int(input('\nEpisode: '))
             update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
-            sql_statement(db, update_episode)
+            issue_sql_statement(db, update_episode)
         elif choice == 'q':
             print()
             break
         elif choice == 'm':
-            sql_select(db, select_mytharc)
+            print_report(db, sql_mytharc_episodes)
 
 main()
