@@ -25,7 +25,10 @@ def main():
         print('Command not recognized. Valid commands are "entry" and "report".')
 
 def insert_log_entry():
-    liters = input("Liters: ")
+    if len(sys.argv) == 4:
+        liters= sys.argv[3]
+    else:
+        liters = input("Liters: ")
     sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {liters})"
     sql_log_report = f"SELECT * FROM {table} WHERE Date IS date('now', 'localtime')"
     issue_sql_statement(db_path, sql_log_entry)
