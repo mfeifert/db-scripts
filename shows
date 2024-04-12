@@ -85,7 +85,7 @@ def print_menu_for_selected_show(table):
             print_report(db, sql_random_episode)
         elif choice == '4':
             episode = int(input('\nEpisode: '))
-            update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
+            sql_update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
             issue_sql_statement(db, update_episode)
         elif choice == 'q':
             print()
