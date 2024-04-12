@@ -53,7 +53,6 @@ def print_report(db, statement):
     subprocess.run([f"sqlite3 -box {db} '{statement}'"], shell=True)
 
 def print_menu_for_selected_show(table):
-    db = db_path
     menu = [
     '',
     '1. List episodes',
@@ -76,17 +75,17 @@ def print_menu_for_selected_show(table):
         choice = input(f'\n{shows[table]}> ')
         if choice == '1':
             print()
-            print_report(db, sql_all_episodes)
+            print_report(db_path, sql_all_episodes)
         elif choice == '2':
             print()
-            print_report(db, sql_next_episode)
+            print_report(db_path, sql_next_episode)
         elif choice == '3':
             print()
-            print_report(db, sql_random_episode)
+            print_report(db_path, sql_random_episode)
         elif choice == '4':
             episode = int(input('\nEpisode: '))
             sql_update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
-            issue_sql_statement(db, update_episode)
+            issue_sql_statement(db_path, update_episode)
         elif choice == 'q':
             print()
             break
@@ -94,6 +93,6 @@ def print_menu_for_selected_show(table):
             print()
             main()
         elif choice == 'a':
-            print_report(db, sql_mytharc_episodes)
+            print_report(db_path, sql_mytharc_episodes)
 
 main()
