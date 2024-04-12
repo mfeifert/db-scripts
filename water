@@ -5,7 +5,8 @@ import sqlite3
 import subprocess
 
 if len(sys.argv) < 3:
-    print("Usage: water FILE entry\n       water FILE report [rows]")
+    print("Usage: water FILE entry [liters]")
+    print("       water FILE report [rows]")
     sys.exit(1)
 
 db_path = sys.argv[1]
