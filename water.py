@@ -12,6 +12,7 @@ if len(sys.argv) < 3:
 db_path = sys.argv[1]
 table = 'water'
 
+
 def main():
     if len(sys.argv) == 4:
         report_rows = sys.argv[3]
@@ -24,6 +25,7 @@ def main():
     else:
         print('Command not recognized. Valid commands are "entry" and "report".')
 
+
 def insert_log_entry():
     if len(sys.argv) == 4:
         liters = sys.argv[3]
@@ -34,9 +36,11 @@ def insert_log_entry():
     issue_sql_statement(db_path, sql_log_entry)
     print_report(db_path, sql_log_report)
 
+
 def print_daily_report(rows):
     sql_daily_report = f"SELECT Date, sum(Liters) AS Liters FROM {table} GROUP BY Date ORDER BY Date DESC LIMIT {rows}"
     print_report(db_path, sql_daily_report)
+
 
 def issue_sql_statement(db, statement):
     con = sqlite3.connect(db)
@@ -45,8 +49,10 @@ def issue_sql_statement(db, statement):
     con.commit()
     con.close()
 
+
 def print_report(db, statement):
     # SELECT statements are run via shell to produce the "-box" output format
     subprocess.run([f'sqlite3 -box {db} "{statement}"'], shell=True)
+
 
 main()
