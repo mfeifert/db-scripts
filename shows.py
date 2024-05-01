@@ -67,7 +67,6 @@ def print_menu_for_selected_show(table):
     '3. Random episode',
     '4. Mark episode as watched',
     'm. Main menu',
-    'q. Quit'
     ]
     if table == 'xfiles':
         menu.append('a. List mythology arc')
@@ -94,9 +93,6 @@ def print_menu_for_selected_show(table):
                 episode = int(input('\nEpisode: '))
                 sql_update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
                 issue_sql_statement(db_path, sql_update_episode)
-            elif choice == 'q':
-                print()
-                break
             elif choice == 'm':
                 print()
                 main()
