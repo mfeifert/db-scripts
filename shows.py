@@ -31,6 +31,7 @@ shows = {
     'rolw': 'Record of Lodoss War'
 }
 
+
 def main():
     index = 1
     print()
@@ -41,6 +42,7 @@ def main():
     selection = int(input()) - 1
     print_menu_for_selected_show(list(shows.items())[selection][0])
 
+
 def issue_sql_statement(db, statement):
     con = sqlite3.connect(db)
     cur = con.cursor()
@@ -48,9 +50,11 @@ def issue_sql_statement(db, statement):
     con.commit()
     con.close()
 
+
 def print_report(db, statement):
     # SELECT statements are run via shell to produce the "-box" output format
     subprocess.run([f"sqlite3 -box {db} '{statement}'"], shell=True)
+
 
 def print_menu_for_selected_show(table):
     menu = [
@@ -94,5 +98,6 @@ def print_menu_for_selected_show(table):
             main()
         elif choice == 'a':
             print_report(db_path, sql_mytharc_episodes)
+
 
 main()
