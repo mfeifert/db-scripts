@@ -99,6 +99,7 @@ def print_menu_for_selected_show(table):
             elif choice == 'a':
                 print_report(db_path, sql_mytharc_episodes)
     except (KeyboardInterrupt, EOFError):
+        print()
         exit()
 
 
