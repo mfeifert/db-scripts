@@ -39,7 +39,10 @@ def main():
        print(f'{index}. {i[1]}')
        index += 1
     print()
-    selection = int(input()) - 1
+    try:
+        selection = int(input()) - 1
+    except (KeyboardInterrupt, EOFError):
+        exit()
     print_menu_for_selected_show(list(shows.items())[selection][0])
 
 
@@ -75,29 +78,32 @@ def print_menu_for_selected_show(table):
     sql_random_episode = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
     sql_mytharc_episodes = f"SELECT * FROM {table} WHERE Mytharc IS NOT NULL"
 
-    while True:
-        choice = input(f'\n{shows[table]}> ')
-        if choice == '1':
-            print()
-            print_report(db_path, sql_all_episodes)
-        elif choice == '2':
-            print()
-            print_report(db_path, sql_next_episode)
-        elif choice == '3':
-            print()
-            print_report(db_path, sql_random_episode)
-        elif choice == '4':
-            episode = int(input('\nEpisode: '))
-            sql_update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
-            issue_sql_statement(db_path, sql_update_episode)
-        elif choice == 'q':
-            print()
-            break
-        elif choice == 'm':
-            print()
-            main()
-        elif choice == 'a':
-            print_report(db_path, sql_mytharc_episodes)
+    try:
+        while True:
+            choice = input(f'\n{shows[table]}> ')
+            if choice == '1':
+                print()
+                print_report(db_path, sql_all_episodes)
+            elif choice == '2':
+                print()
+                print_report(db_path, sql_next_episode)
+            elif choice == '3':
+                print()
+                print_report(db_path, sql_random_episode)
+            elif choice == '4':
+                episode = int(input('\nEpisode: '))
+                sql_update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
+                issue_sql_statement(db_path, sql_update_episode)
+            elif choice == 'q':
+                print()
+                break
+            elif choice == 'm':
+                print()
+                main()
+            elif choice == 'a':
+                print_report(db_path, sql_mytharc_episodes)
+    except (KeyboardInterrupt, EOFError):
+        pass
 
 
 main()
