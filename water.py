@@ -33,11 +33,9 @@ def main():
 def insert_log_entry():
     if len(sys.argv) == 4:
         liters = sys.argv[3]
-    else:
-        liters = input("Liters: ")
-    sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {liters})"
+        sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {liters})"
+        issue_sql_statement(db_path, sql_log_entry)
     sql_log_report = f"SELECT Date, Liters FROM water WHERE Date IS date('now', 'localtime') UNION ALL SELECT 'Total', SUM(Liters) FROM water WHERE Date IS date('now', 'localtime');"
-    issue_sql_statement(db_path, sql_log_entry)
     print_report(db_path, sql_log_report)
 
 
