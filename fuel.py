@@ -13,15 +13,19 @@ table = 'fuel'
 
 
 def main():
-    amount = input('\nPrice: ')
-    ppg = input('Dollars Per Gallon: ')
-    gallons = input('Gallons: ')
-    avg_mpg = input('Average Miles Per Gallon: ')
-    miles = input('Odometer: ')
-    sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {amount}, {ppg}, {gallons}, {avg_mpg}, {miles})"
-    sql_log_report = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
-    issue_sql_statement(db_path, sql_log_entry)
-    print_report(db_path ,sql_log_report)
+    try:
+        amount = input('Price: ')
+        ppg = input('Dollars Per Gallon: ')
+        gallons = input('Gallons: ')
+        avg_mpg = input('Average Miles Per Gallon: ')
+        miles = input('Odometer: ')
+        sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {amount}, {ppg}, {gallons}, {avg_mpg}, {miles})"
+        sql_log_report = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
+        issue_sql_statement(db_path, sql_log_entry)
+        print_report(db_path ,sql_log_report)
+    except (KeyboardInterrupt, EOFError):
+        print()
+        exit()
 
 
 def issue_sql_statement(db, statement):

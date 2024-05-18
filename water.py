@@ -14,16 +14,20 @@ table = 'water'
 
 
 def main():
-    if len(sys.argv) == 4:
-        report_rows = sys.argv[3]
-    else:
-        report_rows = 10
-    if sys.argv[2] == 'entry':
-        insert_log_entry()
-    elif sys.argv[2] == 'report':
-        print_daily_report(report_rows)
-    else:
-        print('Command not recognized. Valid commands are "entry" and "report".')
+    try:
+        if len(sys.argv) == 4:
+            report_rows = sys.argv[3]
+        else:
+            report_rows = 10
+        if sys.argv[2] == 'entry':
+            insert_log_entry()
+        elif sys.argv[2] == 'report':
+            print_daily_report(report_rows)
+        else:
+            print('Command not recognized. Valid commands are "entry" and "report".')
+    except (KeyboardInterrupt, EOFError):
+        print()
+        exit()
 
 
 def insert_log_entry():

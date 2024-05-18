@@ -13,11 +13,15 @@ table = 'yoga'
 
 
 def main():
-    minutes = input('Minutes: ')
-    sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {minutes})"
-    sql_log_report = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
-    issue_sql_statement(db_path, sql_log_entry)
-    print_report(db_path, sql_log_report)
+    try:
+        minutes = input('Minutes: ')
+        sql_log_entry = f"INSERT INTO {table} VALUES (date('now', 'localtime'), {minutes})"
+        sql_log_report = f"SELECT * FROM {table} ORDER BY Date DESC LIMIT 5"
+        issue_sql_statement(db_path, sql_log_entry)
+        print_report(db_path, sql_log_report)
+    except (KeyboardInterrupt, EOFError):
+        print()
+        exit()
 
 
 def issue_sql_statement(db, statement):
