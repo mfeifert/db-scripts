@@ -40,7 +40,7 @@ def main():
        index += 1
     print()
     try:
-        selection = int(input()) - 1
+        selection = int(input("> ")) - 1
     except (KeyboardInterrupt, EOFError):
         exit()
     print_menu_for_selected_show(list(shows.items())[selection][0])
