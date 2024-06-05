@@ -24,6 +24,7 @@ shows = {
     'growingup': 'Growing Up in the Universe',
     'xfiles': 'The X-Files',
     'twilightzone': 'The Twilight Zone',
+    'robot':'Mr. Robot',
     'ft': 'Fawlty Towers',
     'mk': 'Master Keaton',
     'monster': 'Monster',
