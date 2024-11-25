@@ -9,14 +9,14 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 db_path = sys.argv[1]
-food_log_table = 'food_log'
-foods_table = 'foods'
+food_log_table = "food_log"
+foods_table = "foods"
 
 
 def main():
-    #print_nutrition_report(today)
-    #insert_log_entry()
-    #print_nutrition_report(selection)
+    # print_nutrition_report(today)
+    # insert_log_entry()
+    # print_nutrition_report(selection)
     insert_new_food()
 
 
@@ -54,8 +54,12 @@ def insert_new_food():
 
     print(new_food)
 
-    sql_new_food = f'''INSERT INTO {foods_table}(DateAdded, Name, ServingSize, ServingUnit, Calories, TotalFat, SaturatedFat, TransFat, PolyunsaturatedFat, MonounsaturatedFat, Cholesterol, Sodium, Carbohydrates, DietaryFiber, TotalSugars, AddedSugars, Protein, VitaminD, Calcium, Iron, Potassium)
-    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+    sql_new_food = f"""INSERT INTO {foods_table}(DateAdded, Name,
+    ServingSize, ServingUnit, Calories, TotalFat, SaturatedFat, TransFat,
+    PolyunsaturatedFat, MonounsaturatedFat, Cholesterol, Sodium,
+    Carbohydrates, DietaryFiber, TotalSugars, AddedSugars, Protein,
+    VitaminD, Calcium, Iron, Potassium)
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
 
     con = sqlite3.connect(db_path)
     cur = con.cursor()
@@ -65,7 +69,6 @@ def insert_new_food():
 
     con.commit()
     con.close()
-
 
     # name = input("Food name: ")
     # serving_size = input("Serving Size: ")
@@ -88,8 +91,16 @@ def insert_new_food():
     # iron = input("Iron: ")
     # potassium = input("Potassium: ")
 
-    # sql_new_food = f'''INSERT INTO {foods_table}(DateAdded, Name, ServingSize, ServingUnit, Calories, TotalFat, SaturatedFat, TransFat, PolyunsaturatedFat, MonounsaturatedFat, Cholesterol, Sodium, Carbohydrates, DietaryFiber, TotalSugars, AddedSugars, Protein, VitaminD, Calcium, Iron, Potassium)
-    # VALUES(date('now', 'localtime'), {name}, {serving_size}, {serving_unit}, {calories}, {total_fat}, {saturated_fat}, {trans_fat}, {poly_fat}, {mono_fat}, {cholesterol}, {sodium}, {carbohydrates}, {dietary_fiber}, {total_sugars}, {added_sugars}, {protein}, {vitamin_d}, {calcium}, {iron}, {potassium})'''
+    # sql_new_food = f'''INSERT INTO {foods_table}(DateAdded, Name,
+    # ServingSize, ServingUnit, Calories, TotalFat, SaturatedFat,
+    # TransFat, PolyunsaturatedFat, MonounsaturatedFat, Cholesterol,
+    # Sodium, Carbohydrates, DietaryFiber, TotalSugars, AddedSugars,
+    # Protein, VitaminD, Calcium, Iron, Potassium)
+    # VALUES(date('now', 'localtime'), {name}, {serving_size},
+    # {serving_unit}, {calories}, {total_fat}, {saturated_fat},
+    # {trans_fat}, {poly_fat}, {mono_fat}, {cholesterol}, {sodium},
+    # {carbohydrates}, {dietary_fiber}, {total_sugars}, {added_sugars},
+    # {protein}, {vitamin_d}, {calcium}, {iron}, {potassium})'''
 
     # issue_sql_statement(db_path, sql_new_food)
 
