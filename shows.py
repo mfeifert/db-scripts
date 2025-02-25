@@ -74,10 +74,8 @@ def print_menu_for_selected_show(table):
     for i in menu:
         print(i)
     sql_all_episodes = f"SELECT * from {table}"
-    sql_next_episode = f"SELECT * FROM {table} \
-        WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
-    sql_random_episode = f"SELECT * FROM {table} \
-        WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
+    sql_next_episode = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY NumOverall LIMIT 1"
+    sql_random_episode = f"SELECT * FROM {table} WHERE WatchedDate IS NULL ORDER BY random() LIMIT 1"
     sql_mytharc_episodes = f"SELECT * FROM {table} WHERE Mytharc IS NOT NULL"
 
     try:
@@ -94,9 +92,7 @@ def print_menu_for_selected_show(table):
                 print_report(db_path, sql_random_episode)
             elif choice == "4":
                 episode = int(input("\nEpisode: "))
-                sql_update_episode = f"UPDATE {table} \
-                    SET WatchedDate = date('now', 'localtime') \
-                    WHERE NumOverall = {episode}"
+                sql_update_episode = f"UPDATE {table} SET WatchedDate = date('now', 'localtime') WHERE NumOverall = {episode}"
                 issue_sql_statement(db_path, sql_update_episode)
             elif choice == "m":
                 print()
